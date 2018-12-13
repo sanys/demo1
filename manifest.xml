@@ -1,0 +1,505 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns="http://www.we7.cc" versionCode="">
+	
+	<application setting='false'>
+		<name><![CDATA[微有婚恋相亲交友]]></name>
+
+		<identifie><![CDATA[weiyou_jiaoyou]]></identifie>
+
+		<version><![CDATA[1.0.1]]></version>
+
+		<ability><![CDATA[http://www.ggmmjzy.com]]></ability>
+
+		<type><![CDATA[biz]]></type>
+
+		<description><![CDATA[微有婚恋相亲交友]]></description>
+
+		<author><![CDATA[疯狂的IT世界]]></author>
+
+		<url><![CDATA[]]></url>
+
+		<setting><![CDATA[http://www.ggmmjzy.com]]></setting>
+
+	</application>
+
+	
+	<platform>
+		<subscribes>
+			<message type="text" />
+
+			<message type="image" />
+
+			<message type="video" />
+
+			<message type="voice" />
+
+			<message type="shortvideo" />
+
+			<message type="location" />
+
+			<message type="link" />
+
+			<message type="subscribe" />
+
+			<message type="unsubscribe" />
+
+			<message type="qr" />
+
+			<message type="trace" />
+
+			<message type="click" />
+
+			<message type="view" />
+
+			<message type="merchant_order" />
+
+			<message type="user_get_card" />
+
+			<message type="user_del_card" />
+
+			<message type="user_consume_card" />
+
+		</subscribes>
+
+		<handles>
+
+			<message type="text" />
+			<message type="image" />
+			<message type="voice" />
+			<message type="video" />
+			<message type="shortvideo" />
+			<message type="location" />
+			<message type="link" />
+			<message type="subscribe" />
+			<message type="qr" />
+			<message type="trace" />
+			<message type="click" />
+			<message type="merchant_order" />
+			<message type="user_get_card" />
+			<message type="user_del_card" />
+			<message type="user_consume_card" />
+		</handles>
+
+		<rule embed="false" />
+
+		<rule embed="false" />
+
+	<supports>
+
+			<item type="app" />
+	</supports>
+
+	</platform>
+
+	
+	<bindings>
+
+		<menu>
+			<entry title="添加管理员" do="index" state="index" direct="" />
+		</menu>
+
+	</bindings>
+
+	<install><![CDATA[SET FOREIGN_KEY_CHECKS=0;
+
+-- ----------------------------
+-- Table structure for ims_weiyou_jiaoyou_config
+-- ----------------------------
+DROP TABLE IF EXISTS `ims_weiyou_jiaoyou_config`;
+CREATE TABLE `ims_weiyou_jiaoyou_config` (
+  `id` int(10) NOT NULL AUTO_INCREMENT,
+  `openid` varchar(60) DEFAULT NULL,
+  `account` varchar(60) DEFAULT '',
+  `password` varchar(60) DEFAULT '',
+  `uid` int(11) DEFAULT '0',
+  `name` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `description` varchar(255) DEFAULT '',
+  `logo` varchar(150) NOT NULL,
+  `qrcode` varchar(150) DEFAULT '',
+  `siteurl` varchar(60) DEFAULT '',
+  `slider` varchar(255) DEFAULT '' COMMENT '轮播图',
+  `shareTitle` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `backimg` varchar(150) DEFAULT NULL,
+  `province` int(8) DEFAULT '0',
+  `city` int(8) DEFAULT '0',
+  `area` int(8) DEFAULT '0',
+  `scoreName` varchar(16) DEFAULT NULL,
+  `kefu` varchar(160) DEFAULT '',
+  `xqName` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `xqDescription` varchar(255) DEFAULT NULL,
+  `xqShareTitle` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `xqLogo` varchar(150) DEFAULT NULL COMMENT '相亲Logo',
+  `xqQrcode` varchar(150) DEFAULT NULL COMMENT '相亲二维码',
+  `xqKefu` varchar(150) DEFAULT '',
+  `xqNotice` varchar(255) DEFAULT '' COMMENT '相亲告示',
+  `isOpenVip` tinyint(1) DEFAULT '1' COMMENT '相亲平台是否开启强制VIP才能浏览',
+  `isOpenkefu` tinyint(1) DEFAULT '0',
+  `rewardPercent` smallint(3) DEFAULT '0',
+  `isOpenDistribution` tinyint(1) DEFAULT '0',
+  `isOpenAd` tinyint(1) DEFAULT '0',
+  `isOpenChat` tinyint(1) DEFAULT '1' COMMENT '是否开启聊天',
+  `isPerfectInfo` tinyint(1) DEFAULT '0' COMMENT '是否开启强制完善资料',
+  `distributionScale` smallint(3) DEFAULT '0',
+  `viewLinkMoney` smallint(3) DEFAULT '10',
+  `isTakeRedPacket` tinyint(1) DEFAULT '0',
+  `isShowMember` tinyint(1) DEFAULT '0' COMMENT '相亲平台是否开启显示普通会员',
+  `isShowNewIndex` tinyint(1) DEFAULT '0',
+  `isShowUsers` tinyint(1) DEFAULT '0',
+  `isShowViews` tinyint(1) DEFAULT '0',
+  `isShowOnline` tinyint(1) DEFAULT '0',
+  `isShowUserInfo` tinyint(1) DEFAULT '0',
+  `isShowAllSex` tinyint(1) DEFAULT '1' COMMENT '首页只显示异性用户',
+  `islocalUser` tinyint(1) DEFAULT '0',
+  `clicks` int(11) DEFAULT '0',
+  `users` int(11) DEFAULT '0',
+  `tiezis` int(11) DEFAULT '0' COMMENT '帖子数',
+  `reports` int(11) DEFAULT '0',
+  `virtualUsers` int(11) DEFAULT '0',
+  `virtualClicks` int(11) DEFAULT '0',
+  `AppID` varchar(60) DEFAULT '',
+  `AppSecret` varchar(60) DEFAULT '',
+  `wxpay_mchid` varchar(60) DEFAULT NULL,
+  `wxpay_key` varchar(60) DEFAULT '',
+  `dayPrice` int(10) DEFAULT '0',
+  `monthPrice` int(10) DEFAULT '0',
+  `dayVIP` smallint(4) DEFAULT '0',
+  `monthVIP` smallint(4) DEFAULT '0',
+  `quarterVIP` smallint(4) DEFAULT '0',
+  `isOpenVipDIY` tinyint(1) DEFAULT '0',
+  `vipConfig` text COMMENT '自定义VIP',
+  `vipDesc` text,
+  `dayTOP` smallint(4) DEFAULT '0',
+  `monthTOP` smallint(4) DEFAULT '0',
+  `quarterTOP` smallint(4) DEFAULT '0',
+  `isOpenTopDIY` tinyint(1) DEFAULT '0',
+  `topConfig` text NOT NULL,
+  `topDesc` text,
+  `cash` decimal(8,2) DEFAULT '0.00',
+  `money` decimal(8,2) DEFAULT '0.00',
+  `income` decimal(8,2) DEFAULT '0.00' COMMENT '平台总收益',
+  `mans` int(11) DEFAULT '0' COMMENT '帅哥数量',
+  `girls` int(11) DEFAULT '0' COMMENT '美女',
+  `unknows` int(11) DEFAULT '0' COMMENT '性别不知者数量',
+  `isAdmin` tinyint(1) DEFAULT '0' COMMENT '是否超级管理员',
+  `smsType` tinyint(1) DEFAULT '0' COMMENT '短信服务商',
+  `smsAccount` varchar(60) DEFAULT '' COMMENT '短信账号',
+  `smsContent` varchar(255) DEFAULT '' COMMENT '短信内容',
+  `smsPassword` varchar(60) DEFAULT '' COMMENT '短信密码',
+  `authCode` varchar(255) DEFAULT '',
+  `isEdit` tinyint(1) DEFAULT '0' COMMENT '是否必须要完善资料才可以看会员资料',
+  `tipMsg` varchar(255) DEFAULT '' COMMENT '首页提示信息',
+  `status` tinyint(1) DEFAULT '0' COMMENT '平台状态',
+  `time` int(11) DEFAULT '0' COMMENT '平台创建时间',
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of ims_weiyou_jiaoyou_config
+-- ----------------------------
+INSERT INTO `ims_weiyou_jiaoyou_config` VALUES ('1', 'owXXH1Yt5KOX8ncwnqVvF_x_GeoM', 'admin', '21232f297a57a5a743894a0e4a801fc3', '1', '微有相亲', '专注于为微信用户提供真实，干净的同城交友服务，帮助单身男女快速找到理想对象。', '2018-10-03/5bb4b5797db91.png', '2018-08-29/qrcode.png', 'https://www.olnho.com', '2018-06-14/5b22334bbae6d.png,2018-06-14/5b22347aebee9.png,2018-06-14/5b22347d783a3.png', '', '2018-06-13/19-47-32_935519.jpeg', '2', '59', '929', 'V币', '客服微信/手机：18818586318', '微有相亲', '简介', '分享标题', '2018-10-03/5bb4b5797db91.png', '2018-10-03/5bb45dd10836e.png', '红娘微信：18818586318', '微有相亲本地真实婚恋相亲平台,在这里遇见你的Ta,开启浪漫缘分之旅', '1', '1', '25', '0', '1', '1', '1', '15', '32', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '105', '0', '7', '0', '0', '', '', '', '', '4', '38', '1', '20', '50', '0', '[{&quot;type&quot;:&quot;1&quot;,&quot;name&quot;:&quot;8天&quot;,&quot;money&quot;:2200,&quot;vals&quot;:&quot;8&quot;,&quot;typetext&quot;:&quot;按天&quot;},{&quot;type&quot;:&quot;2&quot;,&quot;name&quot;:&quot;1\\u4e2a\\u6708&quot;,&quot;money&quot;:6000,&quot;vals&quot;:&quot;1&quot;,&quot;typetext&quot;:&quot;\\u6309\\u6708&quot;},{&quot;type&quot;:&quot;2&quot;,&quot;name&quot;:&quot;3\\u4e2a\\u6708&quot;,&quot;money&quot;:12000,&quot;vals&quot;:&quot;3&quot;,&quot;typetext&quot;:&quot;\\u6309\\u6708&quot;}]', '&lt;p&gt;A 钻卡会员（568元），1年：&lt;br/&gt;身份加V标识；可查看平台所有用户资料及联系方式；&lt;br/&gt;公众号及朋友圈推荐1次（价值100元）；线上相亲会3次(价值300元)；&lt;br/&gt;红娘1对1牵线陪伴式服务10次(价值2000元)； 优先精准筛选高质量伴侣服务；&lt;br/&gt;1年内红娘无限优先推荐的机会。&lt;br/&gt;&lt;br/&gt;B 金卡会员（268元），3个月：&lt;br/&gt;身份加V标识；可查看平台所有用户资料及联系方式；&lt;br/&gt;公众号及朋友圈推荐1次（价值100元）；线上相亲会2次(价值200元)；&lt;br/&gt;红娘1对1牵线陪伴式服务3次(价值600元)；3个月内红娘优先推荐的机会。&lt;br/&gt;&lt;br/&gt;C 银卡会员（198元），1个月：&lt;br/&gt;身份加V标识；可查看平台所有用户资料及联系方式；&lt;br/&gt;公众号及朋友圈推荐1次（价值100元）；线上相亲会1次(价值100元)；&lt;br/&gt;红娘1对1牵线陪伴式服务1次(价值200元)；1个月内红娘优先推荐的机会。&lt;br/&gt;高端VIP专属：牵线后建小群陪伴式跟进3天，让你不再尬聊，快速进入恋爱状态 &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp;&lt;/p&gt;', '1', '10', '10', '0', '[{&quot;type&quot;:&quot;1&quot;,&quot;name&quot;:&quot;7天&quot;,&quot;money&quot;:1600,&quot;vals&quot;:&quot;7&quot;,&quot;typetext&quot;:&quot;按天&quot;},{&quot;type&quot;:&quot;2&quot;,&quot;name&quot;:&quot;1个月&quot;,&quot;money&quot;:3600,&quot;vals&quot;:&quot;1&quot;,&quot;typetext&quot;:&quot;按月&quot;},{&quot;type&quot;:&quot;2&quot;,&quot;name&quot;:&quot;3个月', null, '0.00', '0.00', '0.00', '67', '9', '0', '1', '1', '1400116987', '【微有】{1} 为您的手机号认证验证码，请于2分钟内填写。如非本人操作，请忽略本短信。', '0de42c7fff4e7b34915fb7060e6d2f13', 'JMMr4qBeLv1Q1Cvm0rb8QtCN-RMvLqiCd2hWf8oDNBr', '1', '恭喜会员*121*99*与*091*3*牵线成功|恭喜会员*012*2*与*101*4*牵线成功|恭喜会员*011*4*与*071*1*牵线成功|恭喜会员*011*4*与*011*0*牵线成功|恭喜会员*122*0*与*021*8*牵线成功|恭喜会员*012*5*与*092*8*牵线成功|恭喜会员*040*9*与*011*6*牵线成功|恭喜会员*011*3*与*092*3*牵线成功|恭喜会员*011*3*与*022*0*牵线成功|恭喜会员*090*2*与*040*3*牵线成功', '0', '1529663062');
+
+-- ----------------------------
+-- Table structure for ims_weiyou_jiaoyou_look
+-- ----------------------------
+DROP TABLE IF EXISTS `ims_weiyou_jiaoyou_look`;
+CREATE TABLE `ims_weiyou_jiaoyou_look` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `pt` int(10) DEFAULT '0',
+  `uid` int(11) DEFAULT '0',
+  `tuid` int(11) NOT NULL DEFAULT '0',
+  `clicks` int(10) DEFAULT '0' COMMENT '查看字数',
+  `status` tinyint(1) DEFAULT '0',
+  `time` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of ims_weiyou_jiaoyou_look
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for ims_weiyou_jiaoyou_love
+-- ----------------------------
+DROP TABLE IF EXISTS `ims_weiyou_jiaoyou_love`;
+CREATE TABLE `ims_weiyou_jiaoyou_love` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `pt` int(10) DEFAULT NULL,
+  `uid` int(11) DEFAULT '0',
+  `tuid` int(11) NOT NULL DEFAULT '0',
+  `status` tinyint(1) DEFAULT '0',
+  `time` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of ims_weiyou_jiaoyou_love
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for ims_weiyou_jiaoyou_order
+-- ----------------------------
+DROP TABLE IF EXISTS `ims_weiyou_jiaoyou_order`;
+CREATE TABLE `ims_weiyou_jiaoyou_order` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `pt` int(10) DEFAULT '0',
+  `openid` varchar(255) DEFAULT NULL,
+  `uid` int(11) DEFAULT '0',
+  `no` varchar(255) DEFAULT NULL,
+  `type` int(11) DEFAULT '1',
+  `price` int(11) DEFAULT '0',
+  `pay_time` int(11) DEFAULT '0',
+  `status` int(11) DEFAULT '0',
+  `time` int(11) DEFAULT '0',
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of ims_weiyou_jiaoyou_order
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for ims_weiyou_jiaoyou_report
+-- ----------------------------
+DROP TABLE IF EXISTS `ims_weiyou_jiaoyou_report`;
+CREATE TABLE `ims_weiyou_jiaoyou_report` (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `uid` int(11) DEFAULT NULL,
+  `rid` int(11) DEFAULT NULL,
+  `tid` int(11) DEFAULT '0',
+  `reason` varchar(255) DEFAULT NULL,
+  `content` text,
+  `imgs` smallint(2) DEFAULT '0' COMMENT '图片',
+  `status` tinyint(1) DEFAULT '0',
+  `type` tinyint(1) DEFAULT '0' COMMENT '投诉类型',
+  `time` int(11) DEFAULT '0',
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of ims_weiyou_jiaoyou_report
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for ims_weiyou_jiaoyou_top
+-- ----------------------------
+DROP TABLE IF EXISTS `ims_weiyou_jiaoyou_top`;
+CREATE TABLE `ims_weiyou_jiaoyou_top` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `pt` int(10) DEFAULT '0',
+  `detail` varchar(255) DEFAULT NULL,
+  `uid` int(11) DEFAULT '0',
+  `rid` int(11) DEFAULT '0',
+  `day` int(11) DEFAULT '0',
+  `pay_price` decimal(10,2) DEFAULT '0.00',
+  `topEnd` int(11) DEFAULT '0',
+  `pay_time` int(11) DEFAULT '0',
+  `status` int(11) DEFAULT '0',
+  `time` int(11) DEFAULT '0',
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of ims_weiyou_jiaoyou_top
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for ims_weiyou_jiaoyou_vaddress
+-- ----------------------------
+DROP TABLE IF EXISTS `ims_weiyou_jiaoyou_vaddress`;
+CREATE TABLE `ims_weiyou_jiaoyou_vaddress` (
+  `Code` varchar(30) NOT NULL,
+  `Name` varchar(255) DEFAULT NULL,
+  `Level` tinyint(3) unsigned DEFAULT '0',
+  `ParentCode` varchar(30) DEFAULT '0',
+  `displayorder` int(11) DEFAULT '0',
+  PRIMARY KEY (`Code`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of ims_weiyou_jiaoyou_vaddress
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for ims_weiyou_jiaoyou_vip
+-- ----------------------------
+DROP TABLE IF EXISTS `ims_weiyou_jiaoyou_vip`;
+CREATE TABLE `ims_weiyou_jiaoyou_vip` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `pt` int(10) DEFAULT '0',
+  `no` varchar(60) DEFAULT NULL,
+  `detail` varchar(255) DEFAULT NULL,
+  `uid` int(11) DEFAULT '0',
+  `rid` int(11) DEFAULT '0',
+  `price` decimal(10,2) DEFAULT '0.00',
+  `day` smallint(4) DEFAULT '0' COMMENT '购买时长',
+  `vipEnd` int(11) DEFAULT '0',
+  `pay_time` int(11) DEFAULT '0',
+  `status` int(11) DEFAULT '0',
+  `time` int(11) DEFAULT '0',
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of ims_weiyou_jiaoyou_vip
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for ims_weiyou_jiaoyou_xq
+-- ----------------------------
+DROP TABLE IF EXISTS `ims_weiyou_jiaoyou_xq`;
+CREATE TABLE `ims_weiyou_jiaoyou_xq` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `openid` varchar(100) DEFAULT NULL,
+  `nickname` varchar(128) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `avatar` text CHARACTER SET utf8,
+  `sex` tinyint(1) DEFAULT '1',
+  `citys` varchar(100) DEFAULT NULL,
+  `hcitys` varchar(100) DEFAULT NULL,
+  `utype` tinyint(1) DEFAULT '2',
+  `Age` smallint(3) DEFAULT '0',
+  `birthday` varchar(60) DEFAULT '',
+  `heights` smallint(4) DEFAULT '0',
+  `weight` int(8) DEFAULT '0',
+  `position` smallint(4) DEFAULT '0',
+  `education` smallint(4) DEFAULT '0',
+  `salary` smallint(4) DEFAULT '0',
+  `yx` varchar(20) CHARACTER SET utf8 DEFAULT '',
+  `realName` varchar(60) DEFAULT NULL COMMENT '真实姓名',
+  `realImg` varchar(100) DEFAULT NULL COMMENT '验证照片',
+  `identify` varchar(60) DEFAULT NULL COMMENT '身份证号码',
+  `parentsState` smallint(4) DEFAULT '0',
+  `maritalState` smallint(4) DEFAULT '0',
+  `childrenState` smallint(4) DEFAULT '0',
+  `familyRank` smallint(4) DEFAULT '0',
+  `phone` varchar(100) DEFAULT '',
+  `wxname` varchar(100) DEFAULT '',
+  `QQ` varchar(60) DEFAULT '',
+  `company` varchar(60) DEFAULT '',
+  `havecar` tinyint(1) DEFAULT '0',
+  `havehouse` tinyint(1) DEFAULT '0',
+  `hProvince` varchar(20) DEFAULT '0',
+  `hCity` varchar(20) DEFAULT '0',
+  `hArea` varchar(20) DEFAULT '0',
+  `hTown` varchar(20) DEFAULT '0',
+  `province` varchar(20) DEFAULT '0',
+  `city` varchar(20) DEFAULT '0',
+  `area` varchar(20) DEFAULT '0',
+  `town` varchar(20) DEFAULT '0',
+  `minority` smallint(4) DEFAULT '0' COMMENT '民族',
+  `constellation` smallint(4) DEFAULT '0' COMMENT '星座',
+  `body` smallint(4) DEFAULT '0' COMMENT '体型',
+  `blood` smallint(4) DEFAULT '0' COMMENT '血型',
+  `shengxiao` smallint(4) DEFAULT '0' COMMENT '生肖',
+  `car` smallint(4) DEFAULT '0' COMMENT '购车情况',
+  `house` smallint(4) DEFAULT '0' COMMENT '购房情况',
+  `wantChild` smallint(4) DEFAULT '0' COMMENT '是否想要孩子',
+  `smoking` smallint(4) DEFAULT '0' COMMENT '抽烟情况',
+  `drinking` smallint(4) DEFAULT '0' COMMENT '喝酒情况',
+  `marryDate` smallint(4) DEFAULT '0' COMMENT '何时结婚',
+  `HomeAddressCode` varchar(60) DEFAULT '',
+  `HomeAddress` varchar(60) DEFAULT '',
+  `AddressCode` varchar(60) DEFAULT '',
+  `Address` varchar(60) DEFAULT '',
+  `headurl` text CHARACTER SET utf8,
+  `delheadurl` varchar(255) DEFAULT '',
+  `type` tinyint(1) DEFAULT '0',
+  `tagNum` varchar(255) DEFAULT '' COMMENT '兴趣爱好',
+  `tagName` varchar(255) DEFAULT '' COMMENT '兴趣爱好',
+  `Introduce` varchar(255) DEFAULT '',
+  `photos` smallint(4) DEFAULT '0' COMMENT '相片数量',
+  `gifts` smallint(4) DEFAULT '0',
+  `latitude` varchar(60) DEFAULT '' COMMENT '纬度',
+  `longitude` varchar(60) DEFAULT '' COMMENT '经度',
+  `zAgeStart` smallint(4) DEFAULT '18' COMMENT '择偶要求年龄起始',
+  `zAgeEnd` smallint(4) DEFAULT '0' COMMENT '择偶要求年龄截止',
+  `zProvince` varchar(60) DEFAULT '',
+  `zCity` varchar(60) DEFAULT '',
+  `zArea` varchar(60) DEFAULT '',
+  `zTown` varchar(60) DEFAULT '',
+  `zAddress` varchar(60) DEFAULT NULL COMMENT '择偶地区要求',
+  `zMaritalState` smallint(4) DEFAULT '0' COMMENT '婚姻状况',
+  `zHeightStart` smallint(4) DEFAULT '0' COMMENT '择偶身高要求',
+  `zHeightEnd` smallint(4) DEFAULT '0' COMMENT '择偶身高要求',
+  `zMinority` smallint(4) DEFAULT '0' COMMENT '择偶民族要求',
+  `zEducation` smallint(4) DEFAULT '0' COMMENT '择偶学历要求',
+  `zSalary` smallint(4) DEFAULT '0' COMMENT '择偶月收入',
+  `zDemand` varchar(255) DEFAULT '' COMMENT '择偶要求',
+  `zSmoking` smallint(4) DEFAULT '0' COMMENT '择偶吸烟情况',
+  `zDrinking` smallint(4) DEFAULT '0' COMMENT '择偶喝酒情况',
+  `zChildrenState` smallint(4) DEFAULT '0' COMMENT '择偶孩子情况',
+  `zWantChildren` smallint(4) DEFAULT '0' COMMENT '想要孩子情况',
+  `zBody` smallint(4) DEFAULT '0' COMMENT '择偶体型',
+  `isEdit` tinyint(1) DEFAULT '0',
+  `isAuth` tinyint(1) DEFAULT '0' COMMENT '是否手机认证',
+  `isOpen` tinyint(1) DEFAULT '1' COMMENT '是否公开资料',
+  `isCheck` tinyint(1) DEFAULT '0' COMMENT '是否真实性认证通过',
+  `isOpenPhone` tinyint(1) DEFAULT '1' COMMENT '是否显示手机号码',
+  `jb` int(11) DEFAULT '0' COMMENT '金币',
+  `clicks` int(11) DEFAULT '0',
+  `chatNumber` int(11) DEFAULT '0' COMMENT '沟通次数',
+  `vipStart` int(11) DEFAULT '0' COMMENT 'vip开始时间',
+  `vipEnd` int(11) DEFAULT '0',
+  `topStart` int(11) DEFAULT '0',
+  `topEnd` int(11) DEFAULT '0',
+  `isAdmin` tinyint(1) DEFAULT '0' COMMENT '是否管理员',
+  `isRecommend` tinyint(1) DEFAULT '0' COMMENT '是否管理员推荐',
+  `ip` varchar(255) DEFAULT NULL,
+  `tuid` int(11) DEFAULT '0' COMMENT '推荐人',
+  `time` int(11) NOT NULL DEFAULT '0',
+  `newPt` int(11) DEFAULT '0' COMMENT '用户最新访问平台',
+  `percent` smallint(4) DEFAULT '20',
+  `fromType` tinyint(1) DEFAULT '0' COMMENT '数据来自于何处',
+  `appType` tinyint(1) DEFAULT '0' COMMENT '应用类型 是相亲 还是婚恋',
+  `status` tinyint(1) DEFAULT '0',
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4;
+
+-- ----------------------------
+-- Records of ims_weiyou_jiaoyou_xq
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for ims_weiyou_jiaoyou_zan
+-- ----------------------------
+DROP TABLE IF EXISTS `ims_weiyou_jiaoyou_zan`;
+CREATE TABLE `ims_weiyou_jiaoyou_zan` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `sid` int(11) DEFAULT '0',
+  `uid` int(11) DEFAULT '0',
+  `nickname` varchar(120) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `avatar` varchar(150) DEFAULT '',
+  `time` int(11) DEFAULT '0',
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of ims_weiyou_jiaoyou_zan
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for ims_weiyou_jiayou_look
+-- ----------------------------
+DROP TABLE IF EXISTS `ims_weiyou_jiayou_look`;
+CREATE TABLE `ims_weiyou_jiayou_look` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `pt` int(10) DEFAULT '0',
+  `uid` int(11) DEFAULT '0',
+  `tuid` int(11) NOT NULL DEFAULT '0',
+  `clicks` int(10) DEFAULT '0' COMMENT '查看字数',
+  `status` tinyint(1) DEFAULT '0',
+  `time` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;]]></install>
+    <uninstall><![CDATA[DROP TABLE IF EXISTS `ims_weiyou_jiaoyou_config`;
+DROP TABLE IF EXISTS `ims_weiyou_jiaoyou_look`;
+DROP TABLE IF EXISTS `ims_weiyou_jiaoyou_love`;
+DROP TABLE IF EXISTS `ims_weiyou_jiaoyou_order`;
+DROP TABLE IF EXISTS `ims_weiyou_jiaoyou_report`;
+DROP TABLE IF EXISTS `ims_weiyou_jiaoyou_top`;
+DROP TABLE IF EXISTS `ims_weiyou_jiaoyou_vaddress`;
+DROP TABLE IF EXISTS `ims_weiyou_jiaoyou_vip`;
+DROP TABLE IF EXISTS `ims_weiyou_jiaoyou_xq`;
+DROP TABLE IF EXISTS `ims_weiyou_jiaoyou_zan`;
+DROP TABLE IF EXISTS `ims_weiyou_jiayou_look`;]]></uninstall>
+    <upgrade><![CDATA[]]></upgrade>
+</manifest>
